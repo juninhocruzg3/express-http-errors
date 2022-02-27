@@ -1,6 +1,6 @@
 {
   "name": "@acruzjr/express-http-errors",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The easiest way to handle errors in Express.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
