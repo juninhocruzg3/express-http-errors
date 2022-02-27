@@ -2,9 +2,6 @@ var app = require('express')();
 
 import { ExpressErrorHandler, BadRequestError, InternalServerError, NotFoundError } from '../lib/index';
 
-// Make the app use error handler middleware
-app.use(ExpressErrorHandler);
-
 app.get(
   '/test400',
   middleware400
@@ -37,5 +34,8 @@ app.get(
 function middleware500(req, res, next) {
   return next(new InternalServerError('Well, this is embarrassing...'))
 }
+
+// Make the app use error handler middleware AFTER ALL middlewares and routes uses.
+app.use(ExpressErrorHandler);
 
 app.listen(3000);

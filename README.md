@@ -11,15 +11,13 @@ A simple node.js module that handle HTTP Errors for express. You can handle HTTP
 
 ## Usage
 
-Initialize your express app, and make it uses ExpressErrorHandle.
+Initialize your express app, add your routes and make it uses ExpressErrorHandle after ALL middlewares and routes.
+Using ExpressErrorHandle before routes declaration will not work.
 Throw your exception inside express NextFunction.
 
 ```ts
 var app = require("express")();
 var { ExpressErrorHandler } = require("@acruzjr/express-http-errors");
-
-// Make the app use error handler middleware
-app.use(ExpressErrorHandler);
 
 app.get(
   '/test400',
@@ -53,6 +51,9 @@ app.get(
 function middleware500(req, res, next) {
   return next(new InternalServerError('Well, this is embarrassing...'))
 }
+
+// Make the app use error handler middleware AFTER ALL middlewares and routes uses.
+app.use(ExpressErrorHandler);
 
 app.listen(3000);
 ```
